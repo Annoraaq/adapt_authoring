@@ -94,6 +94,13 @@ installHelpers.getLatestFrameworkVersion(function(error, latestFrameworkTag) {
         default: ''
       },
       {
+        name: 'dbUseSSL',
+        type: 'string',
+        description: 'Use SSL for Database connection? y/N',
+        pattern: installHelpers.inputHelpers.alphanumValidator,
+        default: 'N'
+      },
+      {
         name: 'dbAuthSource',
         type: 'string',
         description: 'Database server authentication database',

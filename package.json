@@ -133,7 +133,7 @@
     "mime": "1.2.x",
     "mkdirp": "0.3.5",
     "moment": "^2.9.0",
-    "mongoose": "4.2.6",
+    "mongoose": "4.13.7",
     "morgan": "^1.6.1",
     "multer": "^1.0.3",
     "ncp": "~0.5.1",
