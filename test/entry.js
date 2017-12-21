@@ -105,7 +105,10 @@ function removeTestData(done) {
   async.parallel([
     function dumpOldDb(cb) {
       var MongoClient = mongodb.MongoClient;
-      var connStr = 'mongodb://' + testConfig.dbHost + ':' + testConfig.dbPort + '/' + testConfig.dbName;
+      var connStr = 'mongodb://' + createAuthenticationString()
+        + testConfig.dbHost + ':' + testConfig.dbPort
+        + '/' + testConfig.dbName + createConnParams();
+
       MongoClient.connect(connStr, function(error, db) {
         if(error) return cb(error);
         db.dropDatabase(function(error, result) {
@@ -119,6 +122,22 @@ function removeTestData(done) {
       fs.remove(testConfig.dataRoot, cb);
     }
   ], done);
+}
+
+function createAuthenticationString() {
+  var authString = '';
+  if (testConfig.dbUser && testConfig.dbPass) {
+    authString = testConfig.dbUser + ':' + testConfig.dbPass + '@';
+  }
+  return authString;
+}
+
+function createConnParams() {
+  var connParams = '';
+  if (testConfig.dbAuthSource) {
+    connParams = '?authSource=' + testConfig.dbAuthSource;
+  }
+  return connParams;
 }
 
 // Assumes any .js file in this folder is a test script
