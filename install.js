@@ -324,8 +324,8 @@ function configureFeatures(callback) {
     },
     function smtp(cb) {
       installHelpers.getInput(inputData.features.smtp.confirm, function(result) {
+        addConfig(result);
         if(!result.useSmtp || USE_CONFIG && configResults.useSmtp !== 'y') {
-          addConfig(result);
           return cb();
         }
         for(var i = 0, count = inputData.features.smtp.configure.length; i < count; i++) {
