@@ -105,7 +105,7 @@ function removeTestData(done) {
   async.parallel([
     function dumpOldDb(cb) {
       var MongoClient = mongodb.MongoClient;
-      var connStr = 'mongodb://' + testConfig.dbHost + ':' + testConfig.dbPort + '/' + testConfig.dbName;
+      var connStr = 'mongodb://' + testConfig.dbUser + ':' + testConfig.dbPass + '@' + testConfig.dbHost + ':' + testConfig.dbPort + '/' + testConfig.dbName + '?authSource=' + testConfig.dbAuthSource;
       MongoClient.connect(connStr, function(error, db) {
         if(error) return cb(error);
         db.dropDatabase(function(error, result) {
